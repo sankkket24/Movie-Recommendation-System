@@ -1,0 +1,19 @@
+<div>
+  <div class="row">
+    <div class="col-9">
+        <input class="form-control" [(ngModel)]=searchTxt  type="text" placeholder="Search Movie" id="Search">
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="sampleFns()">Search</button>
+    </div>
+  </div>
+
+  <div *ngIf=movies>
+    <div style=" display: flex; flex-wrap: wrap;" *ngFor="let m of movies">
+      <div class="col-4" style=" display: flex; flex-wrap: wrap;">
+        {{m.results[0]?.originalTitleText.text}}
+      </div>
+    </div>
+
+  </div>
+</div>
