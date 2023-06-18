@@ -14,35 +14,35 @@ movie = MovieRecommendation()
 
 @app.route('/')
 def start():
-    return "WelCome to Movie Recommedation System"
+    return "Welcome to the Movie Recommendation System"
 
 @app.route("/TopMovies")
 def topMovies():
     data = movie.get_index_from_popularity()
-    #print(data)
     return jsonify(data)
 
-@app.route("/title",methods=["POST"])
+@app.route("/title", methods=["POST"])
 def findLikeMovies():
     try:
-        jsonData=request.get_json()
-        print(jsonData)
-        data = movie.get_index_from_title(jsonData)
+        jsonData = request.get_json()
+
+        # Perform search based on the movie title
+        data = movie.get_index_from_title(jsonData["title"])
         return jsonify(data)
     except:
         return jsonify(["Wrong Title"])
-        
-
 
 @app.route("/genres", methods=["POST"])
 def findMoviesInGenres():
     try:
-        jsonData=request.get_json()
-        data = movie.get_index_from_genre(jsonData)
+        jsonData = request.get_json()
+        movie_genres = jsonData.get("genres")
+
+        # Perform search based on the movie genres
+        data = movie.get_index_from_genre(movie_genres)
         return jsonify(data)
     except:
         return jsonify(["Wrong Genres"])
-    
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0') 
+   app.run(host='0.0.0.0')
