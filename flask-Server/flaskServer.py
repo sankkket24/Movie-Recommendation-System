@@ -10,8 +10,10 @@ from flask import Flask, jsonify, request
 from MovieRecommendation import MovieRecommendation
 import http.client
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 movie = MovieRecommendation()
 
